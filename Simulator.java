@@ -8,8 +8,10 @@ import java.awt.Color;
  * A simple predator-prey simulator, based on a rectangular field
  * containing rabbits and foxes.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Catherine Oldfield
+ * for RVCC GDEV242 - Fall 2020
+ * from code written by David J. Barnes and Michael Kölling
+ * @version 11-08-2020
  */
 public class Simulator
 {
@@ -21,7 +23,11 @@ public class Simulator
     // The probability that a fox will be created in any given grid position.
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
-    private static final double RABBIT_CREATION_PROBABILITY = 0.08;    
+    private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    
+    // The probability that a velociraptor will be created in any given grid 
+    // position. Velociraptors are added as part of exercise 12.51.
+    private static final double VELOCIRAPTOR_CREATION_PROBABILITY = 0.01;
 
     // List of animals in the field.
     private List<Animal> animals;
@@ -61,6 +67,9 @@ public class Simulator
         view = new SimulatorView(depth, width);
         view.setColor(Rabbit.class, Color.ORANGE);
         view.setColor(Fox.class, Color.BLUE);
+        
+        // Velociraptor added as part of Exercise 12.51.
+        view.setColor(Velociraptor.class, Color.MAGENTA);
         
         // Setup a valid starting point.
         reset();
@@ -136,7 +145,12 @@ public class Simulator
         field.clear();
         for(int row = 0; row < field.getDepth(); row++) {
             for(int col = 0; col < field.getWidth(); col++) {
-                if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
+                if(rand.nextDouble() <= VELOCIRAPTOR_CREATION_PROBABILITY) {
+                    Location location = new Location(row, col);
+                    Velociraptor velociraptor = new Velociraptor(true, field, location);
+                    animals.add(velociraptor);
+                }
+                else if(rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     Fox fox = new Fox(true, field, location);
                     animals.add(fox);

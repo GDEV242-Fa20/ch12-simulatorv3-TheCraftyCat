@@ -5,8 +5,10 @@ import java.util.Random;
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29 (2)
+ * @author Catherine Oldfield
+ * for RVCC GDEV242 - Fall 2020
+ * from code written by David J. Barnes and Michael Kölling
+ * @version 11-08-2020
  */
 public class Rabbit extends Animal
 {
@@ -25,8 +27,8 @@ public class Rabbit extends Animal
     
     // Individual characteristics (instance fields).
     
-    // The rabbit's age.
-    private int age;
+    // The rabbit's age. = REMOVED for exercise 12.45
+    // private int age;
 
     /**
      * Create a new rabbit. A rabbit may be created with age
@@ -39,9 +41,10 @@ public class Rabbit extends Animal
     public Rabbit(boolean randomAge, Field field, Location location)
     {
         super(field, location);
-        age = 0;
+        //age = 0;
         if(randomAge) {
-            age = rand.nextInt(MAX_AGE);
+            // age = rand.nextInt(MAX_AGE);
+            setAge(rand.nextInt(MAX_AGE));
         }
     }
     
@@ -67,17 +70,22 @@ public class Rabbit extends Animal
         }
     }
 
-    /**
-     * Increase the age.
-     * This could result in the rabbit's death.
-     */
-    private void incrementAge()
-    {
-        age++;
-        if(age > MAX_AGE) {
-            setDead();
-        }
-    }
+    // /**
+     // * Increase the age.
+     // * This could result in the rabbit's death.
+     // * 
+     // * The removal of this method from subclass to superclass is a part of 
+     // * Exercise 12.47.
+     // */
+    // private void incrementAge()
+    // {
+        // // age++;
+        // int myAge = getAge();
+        // myAge++;
+        // if(myAge > MAX_AGE) {
+            // setDead();
+        // }
+    // }
     
     /**
      * Check whether or not this rabbit is to give birth at this step.
@@ -98,26 +106,76 @@ public class Rabbit extends Animal
         }
     }
         
-    /**
-     * Generate a number representing the number of births,
-     * if it can breed.
-     * @return The number of births (may be zero).
-     */
-    private int breed()
-    {
-        int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
-            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
-        }
-        return births;
-    }
+    // /**
+     // * Generate a number representing the number of births,
+     // * if it can breed.
+     // * @return The number of births (may be zero).
+     // * 
+     // * The removal of this method from subclass to superclass is a part of
+     // * Exercise 12.48.
+     // */
+    // private int breed()
+    // {
+        // int births = 0;
+        // if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+            // births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        // }
+        // return births;
+    // }
 
+    // /**
+    //  * A rabbit can breed if it has reached the breeding age.
+    //  * @return true if the rabbit can breed, false otherwise.
+    //  * 
+    //  * The removal of this method from subclass to superclass is a part of 
+    //  * Exercise 12.46.
+    //  */
+    // private boolean canBreed()
+    // {
+        // return getAge() >= BREEDING_AGE;
+    // }
+    
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * Get the breeding age of a Rabbit.
+     * @return BREEDING_AGE     The breeding age of a Rabbit.
+     * 
+     * This satisfies part of Exercise 12.46.
      */
-    private boolean canBreed()
+    public int getBreedingAge()
     {
-        return age >= BREEDING_AGE;
+        return BREEDING_AGE;
+    }
+    
+    /**
+     * Get the breeding age of a Rabbit.
+     * @return MAX_AGE     The breeding age of a Rabbit.
+     * 
+     * This satisfies part of Exercise 12.47.
+     */
+    public int getMaxAge()
+    {
+        return MAX_AGE;
+    }
+    
+    /**
+     * Return the breeding probability of a Rabbit.
+     * @return  The breeding probability of a Rabbit.
+     * 
+     * This satisfies part of Exercise 12.48.
+     */
+    public double getBreedingProbability()
+    {
+        return BREEDING_PROBABILITY;
+    }
+    
+    /**
+     * Return the maximum litter size of a Rabbit.
+     * @return  The maximum litter size of a Rabbit.
+     * 
+     * This satisfies part of Exercise 12.48.
+     */
+    public int getMaxLitterSize()
+    {
+        return MAX_LITTER_SIZE;
     }
 }
