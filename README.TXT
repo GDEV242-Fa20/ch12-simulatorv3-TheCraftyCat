@@ -79,3 +79,8 @@ Other:
    GitHub tutorials. For students who have not used this tool before, this
    part of the assignment could cause a lot of frustration on knowing what
    is meant by it.
+   I had initially created a "Lab10Class" as a place to put the text of
+   each exercise, copied from the book. Had I known beforehand how to 
+   edit this file here on GitHub, I could have put that information here
+   to have it right at hand. That would have been much more useful to 
+   know up front.
